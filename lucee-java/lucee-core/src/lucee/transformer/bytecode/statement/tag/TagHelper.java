@@ -172,6 +172,7 @@ public final class TagHelper {
 		Label tagBegin=new Label();
 		Label tagEnd=new Label();
 		ExpressionUtil.visitLine(bc, tag.getStart());
+		ExpressionUtil.markLine(bc, tag.getStart());
 		// TODO adapter.visitLocalVariable("tag", "L"+currType.getInternalName()+";", null, tagBegin, tagEnd, currLocal);
 
 		adapter.visitLabel(tagBegin);

@@ -70,6 +70,7 @@ public class Argument extends ExpressionBase {
 		
 		public Type writeOutValue(BytecodeContext bc, int mode) throws BytecodeException {
 			ExpressionUtil.visitLine(bc, getStart());
+			ExpressionUtil.markLine(bc, getStart());
 			Type t = getValue().writeOut(bc, mode);
 			ExpressionUtil.visitLine(bc, getEnd());
 			return t;

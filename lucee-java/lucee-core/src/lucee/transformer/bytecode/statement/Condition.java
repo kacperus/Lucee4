@@ -111,6 +111,7 @@ public final class Condition extends StatementBaseNoFinal implements HasBodies {
         	while(it.hasNext()) {
         		pair=it.next();
         		ExpressionUtil.visitLine(bc, pair.start);
+        		ExpressionUtil.markLine(bc, pair.start);
         		cv.visitWhenBeforeExpr();
         			pair. condition.writeOut(bc,Expression.MODE_VALUE);
         		cv.visitWhenAfterExprBeforeBody(bc);

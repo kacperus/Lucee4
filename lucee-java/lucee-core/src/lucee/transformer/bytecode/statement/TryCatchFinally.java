@@ -195,7 +195,8 @@ public final class TryCatchFinally extends StatementBase implements Opcodes,HasB
 		
 		//if(fcf!=null && fcf.getAfterFinalGOTOLabel()!=null)ASMUtil.visitLabel(adapter,fcf.getFinalEntryLabel());
 		ExpressionUtil.visitLine(bc, finallyLine);
-		
+		ExpressionUtil.markLine(bc, finallyLine);
+
 		
 		
 		//if (reference != null)
@@ -259,7 +260,8 @@ public final class TryCatchFinally extends StatementBase implements Opcodes,HasB
 				}
 				
 				ExpressionUtil.visitLine(bc, ct.line);
-				
+				ExpressionUtil.markLine(bc, ct.line);
+
 				// pe.typeEqual(type)
 				if(ct.type==null){
 					LitBoolean.TRUE.writeOut(bc, Expression.MODE_VALUE);

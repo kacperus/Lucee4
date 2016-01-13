@@ -111,6 +111,7 @@ public final class ForEach extends StatementBase implements FlowControlBreak,Flo
 			
 			// while
 				ExpressionUtil.visitLine(bc, getStart());
+				ExpressionUtil.markLine(bc, getStart());
 				adapter.visitLabel(begin);
 				
 				// hasNext

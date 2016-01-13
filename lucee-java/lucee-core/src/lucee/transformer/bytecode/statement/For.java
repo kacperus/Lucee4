@@ -73,6 +73,7 @@ public final class For extends StatementBaseNoFinal implements FlowControlBreak,
 		Label afterUpdate = new Label();
 
 		ExpressionUtil.visitLine(bc, getStart());
+		ExpressionUtil.markLine(bc, getStart());
 		adapter.visitLabel(beforeInit);
 		if(init!=null) {
 			init.writeOut(bc, Expression.MODE_VALUE);

@@ -49,6 +49,7 @@ public abstract class ExpressionBase implements Expression {
      */
     public final Type writeOut(BytecodeContext bc, int mode) throws BytecodeException {
         ExpressionUtil.visitLine(bc, start);
+        ExpressionUtil.markLine(bc, start);
     	Type type = _writeOut(bc,mode);
         ExpressionUtil.visitLine(bc, end);
         return type;

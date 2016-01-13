@@ -35,6 +35,7 @@ import lucee.transformer.bytecode.literal.LitString;
 import lucee.transformer.bytecode.visitor.OnFinally;
 import lucee.transformer.bytecode.visitor.TryFinallyVisitor;
 
+import org.kacperus.cf.coverage.TemplateCoverageTool;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.GeneratorAdapter;
@@ -81,10 +82,16 @@ public final class ExpressionUtil {
     	if(pos!=null){
     		visitLine(bc, pos.line);
     	}
-   }
+   	}
+
+	public static synchronized void markLine(BytecodeContext bc, Position pos) {
+		if (pos!=null) {
+			markLine(bc, pos.line);
+		}
+	}
+
     private static synchronized void visitLine(BytecodeContext bc, int line) {
     	if(line>0){
-    		
     		/*Type[] methodTypes = bc.getMethod().getArgumentTypes();
 			if(methodTypes!=null && methodTypes.length>0 && methodTypes[0].equals(Types.PAGE_CONTEXT)) {
     			GeneratorAdapter adapter = bc.getAdapter();
@@ -104,6 +111,24 @@ public final class ExpressionUtil {
 	    	}
     	}
    }
+
+	private static synchronized void markLine(BytecodeContext bc, int line) {
+		if (line > 0) {
+			TemplateCoverageTool.getInstance().markLineAsCovered(
+					bc.getPageSource().getFullRealpath(),
+					line
+			);
+
+			Type[] methodTypes = bc.getMethod().getArgumentTypes();
+			if(methodTypes!=null && methodTypes.length>0 && methodTypes[0].equals(Types.PAGE_CONTEXT)) {
+				GeneratorAdapter adapter = bc.getAdapter();
+				adapter.loadArg(0);
+				adapter.checkCast(Types.PAGE_CONTEXT_IMPL);
+				adapter.push(line);
+				adapter.invokeVirtual(Types.PAGE_CONTEXT_IMPL,CURRENT_LINE );
+			}
+		}
+	}
 
 	public static synchronized void lastLine(BytecodeContext bc) {
     	int line = Caster.toIntValue(last.get(bc.getClassName()),-1);

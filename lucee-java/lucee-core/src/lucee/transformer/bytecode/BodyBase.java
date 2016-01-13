@@ -165,6 +165,7 @@ public class BodyBase extends StatementBaseNoFinal implements Body {
         		//ExpressionUtil.visitLine(bc, s.getLine());
         		String method= ASMUtil.createOverfowMethod(bc.getMethod().getName(),bc.getPage().getMethodCount());
         		ExpressionUtil.visitLine(bc, s.getStart());
+        		ExpressionUtil.markLine(bc, s.getStart());
         		//ExpressionUtil.lastLine(bc);
         		m= new Method(method,Types.VOID,new Type[]{Types.PAGE_CONTEXT});
     			a = new GeneratorAdapter(Opcodes.ACC_PRIVATE+Opcodes.ACC_FINAL , m, null, new Type[]{Types.THROWABLE}, bc.getClassWriter());
@@ -256,6 +257,7 @@ public class BodyBase extends StatementBaseNoFinal implements Body {
 		for(int i=0;i<statements.length;i++){
 			if(statements[i].getStart()!=null) {
 				ExpressionUtil.visitLine(bc, statements[i].getStart());
+				ExpressionUtil.markLine(bc, statements[i].getStart());
 				break;
 			}
 		}

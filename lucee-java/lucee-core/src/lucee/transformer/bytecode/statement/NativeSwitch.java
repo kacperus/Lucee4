@@ -70,6 +70,7 @@ public final class NativeSwitch extends StatementBaseNoFinal implements FlowCont
 			c= it.next();
 			adapter.visitLabel(c.label);
 			ExpressionUtil.visitLine(bc, c.startPos);
+			ExpressionUtil.markLine(bc, c.startPos);
 			c.body.writeOut(bc);
 			ExpressionUtil.visitLine(bc, c.endPos);
 			if(c.doBreak){

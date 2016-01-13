@@ -69,6 +69,7 @@ public abstract class StatementBase implements Statement {
      */
     public final void writeOut(BytecodeContext bc) throws BytecodeException {
     	ExpressionUtil.visitLine(bc, start);
+    	ExpressionUtil.markLine(bc, start);
         _writeOut(bc);
     	ExpressionUtil.visitLine(bc, end);
     	

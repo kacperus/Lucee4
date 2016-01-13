@@ -233,6 +233,7 @@ public class Variable extends ExpressionBase implements Invoker {
 	
 	public final Type writeOutCollection(BytecodeContext bc, int mode) throws BytecodeException {
         ExpressionUtil.visitLine(bc, getStart());
+        ExpressionUtil.markLine(bc, getStart());
     	Type type = _writeOut(bc,mode, Boolean.TRUE);
         ExpressionUtil.visitLine(bc, getEnd());
         return type;

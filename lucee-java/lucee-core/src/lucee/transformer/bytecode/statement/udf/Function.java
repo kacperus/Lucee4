@@ -371,6 +371,7 @@ public abstract class Function extends StatementBaseNoFinal implements Opcodes, 
 	 */
 	public final void writeOut(BytecodeContext bc, int type) throws BytecodeException {
     	ExpressionUtil.visitLine(bc, getStart());
+    	ExpressionUtil.markLine(bc, getStart());
         _writeOut(bc,type);
     	ExpressionUtil.visitLine(bc, getEnd());
 	}

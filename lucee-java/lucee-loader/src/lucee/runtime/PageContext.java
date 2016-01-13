@@ -65,6 +65,7 @@ import lucee.runtime.type.scope.URLForm;
 import lucee.runtime.type.scope.Undefined;
 import lucee.runtime.type.scope.Variables;
 import lucee.runtime.util.VariableUtil;
+import org.kacperus.cf.coverage.TemplateCoverageTool;
 
 /**
  * page context for every page object. 
@@ -73,7 +74,14 @@ import lucee.runtime.util.VariableUtil;
  *  and with sessionScope() you get CFML combatible session object (Struct,Scope).
  */
 public abstract class PageContext extends javax.servlet.jsp.PageContext {
- 
+
+    public void currentLine(int lineNumber) {
+        TemplateCoverageTool.getInstance().markLineAsVisited(
+                getCurrentPageSource().getFullRealpath(),
+                lineNumber
+        );
+    }
+
     /**
      * returns matching scope
      * @return scope matching to defined scope definition
